@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package operation;
+
+// Operation bundles up types describing a FIMS operation.
+message Operation {
+
+  // Id models the unique ID of an operation.
+  message Id {
+    string as_string = 1;  // The textual representation of an Id.
+  }
+
+  // represents a fixed 4d volume that a drone is planned to occupy
+  message Waypoint {
+    Altitude.Interval altitude           = 1; // The altitude interval of the flight plan.
+    google.protobuf.Timestamp start_time = 2; // The error allowed [s] from the time in a volume.
+    google.protobuf.Timestamp end_time   = 3; // The estimated time to arrive at the location.
+    Geometry.Common polygon              = 4; // Coordinate where the drone is at a given time.
+  }
+
+  // holds coordinates relevant entities
+  message Locations {
+    Coordinate takeoff          = 1;  // The takeoff point of the future flight.
+    Coordinate controller       = 2;  // The coordinates of the controller. Defaults to the first point in the flight path.
+    Coordinate gcs              = 3;  // The coordinates of the ground control system. Will be required for TCL4 flights.
+  }
+
+  // Priority determines the priority of a flight
+  message Priority {
+    double as_double = 1;
+  }
+
+  Id id                       = 1;  // The unique ID of the operation.
+  Status status               = 2;  // The status summary of the operation.
+  PilotId pilot               = 3;   // The pilot responsible for the flight.
+  AircraftId aircraft         = 4;   // The aircraft conducting the flight.
+  repeated RulesetId rulesets = 5;   // The rulesets this flight is operated under.
+  Priority priority           = 6;   // [default = 0] A bool which determines if the flight is high priority.
+  Locations locations         = 7;   // Holds locations of relevant entities
+  repeated Waypoint envelope  = 8; // A set of waypoints representing the planned route.
+}
