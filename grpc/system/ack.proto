@@ -7,7 +7,7 @@ import "extensions.proto";
 
 package system;
 
-option go_package = "github.com/airmap/interfaces/src/go/system";
+option go_package = "github.com/airmap/interfaces/grpc/system";
 
 // Ack models an acknowledgement of a message.
 message Ack {

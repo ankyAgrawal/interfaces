@@ -7,7 +7,7 @@ import "google/protobuf/duration.proto";
 
 package grpc;
 
-option go_package = "github.com/airmap/interfaces/src/go";
+option go_package = "github.com/airmap/interfaces/grpc";
 
 extend google.protobuf.FieldOptions {
   // All fields in a message are considered optional and it is left up to application code

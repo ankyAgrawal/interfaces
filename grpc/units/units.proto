@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package units;
 
-option go_package = "github.com/airmap/interfaces/src/go/units";
+option go_package = "github.com/airmap/interfaces/grpc/units";
 
 // Degrees models an angular quantity in degrees [°].
 message Degrees {

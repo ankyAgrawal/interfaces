@@ -7,7 +7,7 @@ import "units/units.proto";
 
 package units;
 
-option go_package = "github.com/airmap/interfaces/src/go/units";
+option go_package = "github.com/airmap/interfaces/grpc/units";
 
 extend google.protobuf.FieldOptions {
   Degrees default_degrees                     = 60002;

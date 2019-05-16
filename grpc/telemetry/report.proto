@@ -8,7 +8,7 @@ import "measurements/measurements.proto";
 
 package telemetry;
 
-option go_package = "github.com/airmap/interfaces/src/go/telemetry";
+option go_package = "github.com/airmap/interfaces/grpc/telemetry";
 
 // Report models a measurement at a given point in time.
 message Report {

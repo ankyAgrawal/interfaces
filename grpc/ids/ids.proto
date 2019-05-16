@@ -4,7 +4,7 @@ syntax = "proto3";
 
 package ids;
 
-option go_package = "github.com/airmap/interfaces/src/go/ids";
+option go_package = "github.com/airmap/interfaces/grpc/ids";
 
 // Operation models the unique id of an operation.
 message Operation {

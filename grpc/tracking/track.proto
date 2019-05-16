@@ -12,7 +12,7 @@ import "tracking/identity.proto";
 
 package tracking;
 
-option go_package = "github.com/airmap/interfaces/src/go/tracking";
+option go_package = "github.com/airmap/interfaces/grpc/tracking";
 
 // Track models a single track observation.
 message Track {
