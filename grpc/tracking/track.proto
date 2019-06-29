@@ -28,8 +28,8 @@ message Track {
   repeated google.protobuf.Any details  = 1024 [(grpc.nullable) = true];  // Vendor-specific details.
 
   message Flags {
-    bool coasted   =  1;  // This observation has been synthesized via projection.
-    bool shadowed  =  2;  // A more recent observation exists from another provider.
+    bool projected  = 1;  // This track has been synthesized via projection.
+    bool shadowed   = 2;  // A more recent observation exists from another provider.
   }
 
   // Batch models a batch of tracks.
