@@ -19,8 +19,9 @@ service Collector {
   rpc ConnectProcessor(stream Update.FromProcessor) returns (stream Update.ToProcessor);
 }
 
+// ConnectProcessorParameters models configuration parameters for processor streams
 message ConnectProcessorParameters {
-  bool projection_enabled = 1;  // Tracks will be forward-projected at a constant rate.
+  bool enable_projection = 1;  // Tracks will be forward-projected at a constant rate.
 }
 
 // Update bundles types used in the exchange of tracks.
