@@ -1,3 +1,4 @@
+![AirMap: Airspace Interfaces](airmap.png)
 # AirMap Interfaces
 This repository contains the [Protocol Buffers](https://github.com/google/protobuf) (version 3) definitions for all public AirMap services that support gRPC.
 
