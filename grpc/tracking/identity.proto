@@ -46,7 +46,7 @@ message Identity {
   // Operation models an operation.
   message Operation {
     ids.Operation operation_id   = 1;  // The operation identifier.
-    ids.USP service_provider_id  = 2;  // The UTM Service Provider that issued the identifier.
+    ids.USS service_provider_id  = 2;  // The UTM Service Supplier that issued the identifier.
   }
 
   // Icao bundles up information that describes an aircraft in the ICAO context.
