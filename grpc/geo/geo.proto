@@ -5,6 +5,8 @@ syntax = "proto3";
 import "extensions.proto";
 import "units/units.proto";
 import "units/extensions.proto";
+import "measurements/measurements.proto";
+import "google/protobuf/timestamp.proto";
 
 package geo;
 
@@ -21,6 +23,12 @@ message Coordinate2D {
         units.Degrees latitude   = 1 [(units.min_degrees).value = 0.0];  // The error estimate on the latitude measurement.
         units.Degrees longitude  = 2 [(units.min_degrees).value = 0.0];  // The error estimate on the longitude measurement.
     }
+}
+
+// Position models a postion in time
+message Position4D {
+    google.protobuf.Timestamp timestamp     = 1;  // The time applicability of the position
+    measurements.Position.Absolute position = 2;  // The position at a given time
 }
 
 // BoundingBox models a geographic bounds

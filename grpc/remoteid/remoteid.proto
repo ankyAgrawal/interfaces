@@ -17,7 +17,7 @@ service RemoteID {
 
 // MonitorAreaParameters bundles parameters used in the MonitorOperationsArea rpc.
 message MonitorAreaParameters {
-    geo.BoundingBox area_of_interest = 1; // The area of interest to monitor. *Span must not exceed 1km* 
+    geo.BoundingBox area_of_interest = 1; // The area of interest to monitor. *Span must not exceed 1km*
 }
 
 message MonitorAreaResponse {
@@ -30,10 +30,10 @@ message MonitorAreaResponse {
 
     // Added models an operation that has entered the monitored area.
     message Added {
-        Operation operation                               = 1;  // New operation that has entered the area.
-        repeated measurements.Position.Absolute positions = 2;  // Batch of recent positions for the aircraft.
+        Operation operation               = 1;  // New operation that has entered the area.
+        repeated geo.Position4D positions = 2;  // Batch of recent positions for the aircraft.
     }
-    
+
     // Updated models an operation that has been updated in the monitored area.
     message Updated {
         // details is a discriminated union of update types
@@ -42,7 +42,7 @@ message MonitorAreaResponse {
             Operation.State state = 2;  // State that has been updated.
         }
     }
-    
+
     // Removed models an operation that has been removed from the monitored area.
     message Removed {
         ids.Operation id = 1;  // Identifier for the operation that exited the monitored area.
@@ -57,7 +57,7 @@ message Operation {
     geo.Polygon geometry = 4;  // Geographic operating area.
     string purpose       = 5;  // Description of the operation's purpose.
     bool simulated       = 6;  // Operation is simulated without a physical aircraft.
-    
+
     // State models an operation's current state
     message State {
         ids.Operation id                        = 1;  // The operation the state is associated with.
