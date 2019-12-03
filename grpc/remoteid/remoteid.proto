@@ -76,8 +76,6 @@ message Operator {
 // Aircraft models the vehicle performing an operation.
 message Aircraft {
     Type type           = 1;  // Type of aircraft.
-    string make         = 2;  // Manufacturer of the aircraft.
-    string model        = 3;  // Model of the aircraft.
     string serial       = 4;  // Manufacturer-assigned serial number of the aircraft.
     string registration = 5;  // CAA-issued aircraft registration.
 
