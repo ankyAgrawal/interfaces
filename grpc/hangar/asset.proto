@@ -1,0 +1,107 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+message AssetQueryReuest {
+    message AssetQueryFilter {
+        enum Operator {
+            EQUAL = 0;
+            NOT_EQUAL = 1;
+            GREATER_THAN_OR_EQUAL = 2;
+            GREATER_THAN = 3;
+            LESS_THAN_OR_EQUAL = 4;
+            LESS_THAN = 5;
+        }
+
+        enum Conjunction {
+            AND = 0;
+            OR = 1;
+        }
+
+        enum Field {
+           TYPE = 0;
+           STATUS = 1;
+           DATE_CREATED = 2;
+           DATE_MODIFIED = 3;
+           IS_PRIMARY = 4;
+           ORIGIN_ORDER = 5;
+           CONCEPT = 6;
+           ASSET_COLLECTION = 7;
+        }
+
+        Field field = 1;
+        string value = 2;
+        Operator operator = 3;
+        Conjunction conjunction = 4;
+    };
+
+    int32 limit = 1;
+    int32 offset = 2;
+    repeated AssetQueryFilter filters = 3;
+}
+
+message AssetQueryResponse {
+    repeated Asset assets = 1;
+    // Do we want to represent the overall count here?
+    // more records boolean?
+}
+
+message Asset {
+    message AssetType {
+        number id = 1;
+        string summary = 2;
+    }
+
+    enum AssetStatus {
+        UNKNOWN = 0;
+        PENDING = 1;
+        PROCESSING = 2;
+        COMPLETE = 3;
+        USER_REJECTED = 4;
+        FAILED = 5;
+        ABORTED = 6;
+        SYSTEM_EXCEPTION = 7;
+        INDEXING = 8;
+    }
+
+    string id = 1;
+    AssetType type = 2;
+    AssetStatus status = 3;
+    boolean is_primary = 4;
+    Timestamp date_created = 5;
+    Timestamp date_modified = 6;
+    AssetMetadata metadata  = 7;
+    string origin_order_id = 8;
+    string object_path = 9;
+}
+
+message AssetMetadata {
+    message BarometricPressure {
+        enum PressureUnit {
+            UNKNOWN = 0;
+            HPA = 1;
+        }
+        float value = 1;
+        PressureUnit unit = 2;
+    }
+            
+    message Tiles {
+        message TileLevel {
+            ImageDimensions full = 1;
+            ImageDimensions tile = 2;
+        }
+
+        repeated TileLevel levels = 1;
+    }
+
+    BarometricPressure barometric_pressure = 1;
+    ImageDimensions input = 2;
+    int32 num_objects = 3;
+    float sum_raw_file_sizes_mb = 3;
+    Tiles tiles = 4;
+}
+
+message ImageDimensions {
+    int32 height = 1; 
+    int32 width = 2; 
+}
