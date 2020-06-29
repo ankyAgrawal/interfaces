@@ -5,15 +5,16 @@ const proto = require('../proto')
 
 const util = require('util')
 
-
+api_key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcmVkZW50aWFsX2lkIjoiY3JlZGVudGlhbHxCT2drZFBRUzQzazZxa3NncUJwSk1peTBSMzAwIiwiYXBwbGljYXRpb25faWQiOiJhcHBsaWNhdGlvbnxQb0w4bFk5aFA1YjNwYWN3cFIwSjVDbXBua2U4Iiwib3JnYW5pemF0aW9uX2lkIjoiZGV2ZWxvcGVyfGdvR2F5UWFGbkJkTWQ1ZjJPWWs4eEZrMkJad2wiLCJpYXQiOjE1OTMxMTU5MTF9.chgVxepo7RJlaD329Fdp5xP5w7xw1M6L5QjdQGSW5IY.eyJjcmVkZW50aWFsX2lkIjoiY3JlZGVudGlhbHxrM3Z4eERKVEU3dmtPeEhlNFkybzlJT1IwRWdrIiwiYXBwbGljYXRpb25faWQiOiJhcHBsaWNhdGlvbnw2eTR5bWx6Y2FFRE9tQlN5UTBNUGRjM215YndRIiwib3JnYW5pemF0aW9uX2lkIjoiZGV2ZWxvcGVyfGdvR2F5UWFGbkJkTWQ1ZjJPWWs4eEZrMkJad2wiLCJpYXQiOjE1OTIyODA3MjR9.xwoHNzvK1woE9Ur-7WQM_Pn0ipZl8k180W5FWJ5Dt4w'
+client_id = '9c819ed1-45ce-4631-8934-c42e90ae0d12'
 // Configure your env with your client id and client secret
 const API_ENDPOINT = process.env.API_ENDPOINT || 'api.airmap.com:443'
-const CLIENT_ID = process.env.CLIENT_ID
-const CLIENT_SECRET = process.env.CLIENT_SECRET
+const CLIENT_ID =  client_id
+const CLIENT_SECRET =  api_key
 
 // The starting coordinate for the simulation. Defaults to Baja California
-const COORDINATE_LATITUDE = process.env.COORDINATE_LATITUDE | 23.3575
-const COORDINATE_LONGITUDE = process.env.COORDINATE_LONGITUDE || -109.823
+const COORDINATE_LATITUDE = process.env.COORDINATE_LATITUDE | -87.92753219604492
+const COORDINATE_LONGITUDE = process.env.COORDINATE_LONGITUDE || 41.99152230528149
 
 function connectProvider(token) {
 
@@ -26,6 +27,7 @@ function connectProvider(token) {
   const client = collector.ConnectProvider(metadata)
 
   client.on('data', function (response) {
+    console.log(response)
     switch (response.details) {
       case "ack":
         console.log('received acknowledgement (ACK) from collector: ', response.ack)
@@ -118,7 +120,9 @@ function buildReport(lat, lng) {
 // Login using the client credentials,
 // connect to the collector with a token,
 // and run the simulation
-auth.authenticateServiceAccount(CLIENT_ID, CLIENT_SECRET)
+auth.authenticateServiceAccount()
   .then(connectProvider)
   .then(runSimulation)
   .catch(console.log)
+
+
